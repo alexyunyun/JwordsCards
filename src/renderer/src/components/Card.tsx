@@ -63,6 +63,8 @@ function Card({
     onPrevious();
   };
 
+
+
   return (
     <div className="card-wrapper">
       <div className="card-container">

@@ -22,7 +22,7 @@ function createWindow(): void {
     x: savedBounds.x,
     y: savedBounds.y,
     show: false,
-    frame: false, // 无边框窗口
+    frame: true, // 恢复系统标题栏
     alwaysOnTop: true, // 始终置顶
     resizable: false,
     transparent: true,

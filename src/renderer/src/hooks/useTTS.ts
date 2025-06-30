@@ -1,140 +1,97 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { TTSState } from '../types';
+
+interface TTSOptions {
+  rate?: number;
+  pitch?: number;
+  volume?: number;
+  voice?: SpeechSynthesisVoice;
+}
 
 export function useTTS() {
-  const [state, setState] = useState<TTSState>({
-    isSupported: false,
-    isPlaying: false,
-    voices: [],
-    selectedVoice: null,
-  });
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isSupported, setIsSupported] = useState(false);
+  const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
 
-  // 检查浏览器支持
   useEffect(() => {
-    const checkSupport = () => {
-      const isSupported = 'speechSynthesis' in window;
-      setState((prev) => ({ ...prev, isSupported }));
+    // 检查浏览器支持
+    const supported = 'speechSynthesis' in window;
+    setIsSupported(supported);
 
-      if (isSupported) {
-        loadVoices();
-      }
-    };
+    if (supported) {
+      // 加载语音列表
+      const loadVoices = () => {
+        const availableVoices = window.speechSynthesis.getVoices();
+        setVoices(availableVoices);
+      };
 
-    checkSupport();
-  }, []);
+      // 立即尝试加载
+      loadVoices();
 
-  // 加载可用语音
-  const loadVoices = useCallback(() => {
-    const voices = speechSynthesis.getVoices();
+      // 监听语音加载完成事件
+      window.speechSynthesis.addEventListener('voiceschanged', loadVoices);
 
-    // 优先选择日语语音
-    const japaneseVoice = voices.find(
-      (voice) =>
-        voice.lang.startsWith('ja') ||
-        voice.name.toLowerCase().includes('japanese') ||
-        voice.name.toLowerCase().includes('japan'),
-    );
-
-    setState((prev) => ({
-      ...prev,
-      voices,
-      selectedVoice: japaneseVoice || voices[0] || null,
-    }));
-  }, []);
-
-  // 监听语音加载完成事件
-  useEffect(() => {
-    if (state.isSupported) {
-      speechSynthesis.addEventListener('voiceschanged', loadVoices);
       return () => {
-        speechSynthesis.removeEventListener('voiceschanged', loadVoices);
+        window.speechSynthesis.removeEventListener('voiceschanged', loadVoices);
       };
     }
-  }, [state.isSupported, loadVoices]);
+  }, []);
 
-  // 说话函数
-  const speak = useCallback(
-    (
-      text: string,
-      options?: {
-        rate?: number;
-        pitch?: number;
-        volume?: number;
-        voice?: SpeechSynthesisVoice;
-      },
-    ) => {
-      if (!state.isSupported || !text.trim()) {
-        return Promise.reject(new Error('TTS not supported or empty text'));
+  const speak = useCallback(async (text: string, options: TTSOptions = {}) => {
+    if (!isSupported || !text.trim()) {
+      return;
+    }
+
+    try {
+      // 停止当前播放
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      
+      // 设置参数
+      utterance.rate = options.rate || 0.8;
+      utterance.pitch = options.pitch || 1;
+      utterance.volume = options.volume || 1;
+      
+      // 设置语音
+      if (options.voice) {
+        utterance.voice = options.voice;
+      } else {
+        // 尝试使用日语语音
+        const japaneseVoice = voices.find(voice => 
+          voice.lang.includes('ja') || voice.lang.includes('jp') ||
+          voice.name.toLowerCase().includes('japanese') ||
+          voice.name.toLowerCase().includes('japan')
+        );
+        if (japaneseVoice) {
+          utterance.voice = japaneseVoice;
+        }
       }
 
-      // 停止当前播放
-      speechSynthesis.cancel();
+      // 设置事件监听
+      utterance.onstart = () => setIsPlaying(true);
+      utterance.onend = () => setIsPlaying(false);
+      utterance.onerror = () => setIsPlaying(false);
 
-      return new Promise<void>((resolve, reject) => {
-        const utterance = new SpeechSynthesisUtterance(text);
+      // 开始播放
+      window.speechSynthesis.speak(utterance);
+    } catch (error) {
+      console.error('TTS Error:', error);
+      setIsPlaying(false);
+    }
+  }, [isSupported, voices]);
 
-        // 设置语音参数
-        utterance.rate = options?.rate ?? 1;
-        utterance.pitch = options?.pitch ?? 1;
-        utterance.volume = options?.volume ?? 1;
-        utterance.voice = options?.voice ?? state.selectedVoice;
-
-        // 事件处理
-        utterance.onstart = () => {
-          setState((prev) => ({ ...prev, isPlaying: true }));
-        };
-
-        utterance.onend = () => {
-          setState((prev) => ({ ...prev, isPlaying: false }));
-          resolve();
-        };
-
-        utterance.onerror = (event) => {
-          setState((prev) => ({ ...prev, isPlaying: false }));
-          reject(new Error(`TTS error: ${event.error}`));
-        };
-
-        // 开始播放
-        speechSynthesis.speak(utterance);
-      });
-    },
-    [state.isSupported, state.selectedVoice],
-  );
-
-  // 停止播放
   const stop = useCallback(() => {
-    if (state.isSupported) {
-      speechSynthesis.cancel();
-      setState((prev) => ({ ...prev, isPlaying: false }));
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
     }
-  }, [state.isSupported]);
-
-  // 暂停播放
-  const pause = useCallback(() => {
-    if (state.isSupported && state.isPlaying) {
-      speechSynthesis.pause();
-    }
-  }, [state.isSupported, state.isPlaying]);
-
-  // 恢复播放
-  const resume = useCallback(() => {
-    if (state.isSupported && speechSynthesis.paused) {
-      speechSynthesis.resume();
-    }
-  }, [state.isSupported]);
-
-  // 设置语音
-  const setVoice = useCallback((voice: SpeechSynthesisVoice) => {
-    setState((prev) => ({ ...prev, selectedVoice: voice }));
+    setIsPlaying(false);
   }, []);
 
   return {
-    ...state,
     speak,
     stop,
-    pause,
-    resume,
-    setVoice,
-    loadVoices,
+    isPlaying,
+    isSupported,
+    voices,
   };
 }
