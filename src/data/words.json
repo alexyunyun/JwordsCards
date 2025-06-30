@@ -1,0 +1,112 @@
+[
+  {
+    "id": "word_001",
+    "word": "こんにちは",
+    "pronunciation": {
+      "romaji": "konnichiwa",
+      "katakana": "コンニチハ"
+    },
+    "meaning": "你好（日间问候）",
+    "example": "こんにちは、元気ですか？",
+    "bookmarked": false
+  },
+  {
+    "id": "word_002",
+    "word": "ありがとう",
+    "pronunciation": {
+      "romaji": "arigatō",
+      "katakana": "アリガトウ"
+    },
+    "meaning": "谢谢",
+    "example": "ありがとう、助かりました",
+    "bookmarked": false
+  },
+  {
+    "id": "word_003",
+    "word": "すみません",
+    "pronunciation": {
+      "romaji": "sumimasen",
+      "katakana": "スミマセン"
+    },
+    "meaning": "对不起；不好意思",
+    "example": "すみません、遅れました",
+    "bookmarked": false
+  },
+  {
+    "id": "word_004",
+    "word": "おはよう",
+    "pronunciation": {
+      "romaji": "ohayō",
+      "katakana": "オハヨウ"
+    },
+    "meaning": "早上好",
+    "example": "おはよう、今日もよろしく",
+    "bookmarked": false
+  },
+  {
+    "id": "word_005",
+    "word": "さようなら",
+    "pronunciation": {
+      "romaji": "sayōnara",
+      "katakana": "サヨウナラ"
+    },
+    "meaning": "再见",
+    "example": "さようなら、また明日",
+    "bookmarked": false
+  },
+  {
+    "id": "word_006",
+    "word": "はじめまして",
+    "pronunciation": {
+      "romaji": "hajimemashite",
+      "katakana": "ハジメマシテ"
+    },
+    "meaning": "初次见面",
+    "example": "はじめまして、よろしくお願いします",
+    "bookmarked": false
+  },
+  {
+    "id": "word_007",
+    "word": "お疲れ様",
+    "pronunciation": {
+      "romaji": "otsukaresama",
+      "katakana": "オツカレサマ"
+    },
+    "meaning": "辛苦了",
+    "example": "お疲れ様でした、今日はありがとう",
+    "bookmarked": false
+  },
+  {
+    "id": "word_008",
+    "word": "いただきます",
+    "pronunciation": {
+      "romaji": "itadakimasu",
+      "katakana": "イタダキマス"
+    },
+    "meaning": "我开动了（用餐前）",
+    "example": "いただきます、美味しそうですね",
+    "bookmarked": false
+  },
+  {
+    "id": "word_009",
+    "word": "ごちそうさま",
+    "pronunciation": {
+      "romaji": "gochisōsama",
+      "katakana": "ゴチソウサマ"
+    },
+    "meaning": "我吃饱了（用餐后）",
+    "example": "ごちそうさまでした、とても美味しかったです",
+    "bookmarked": false
+  },
+  {
+    "id": "word_010",
+    "word": "お元気ですか",
+    "pronunciation": {
+      "romaji": "ogenki desu ka",
+      "katakana": "オゲンキデスカ"
+    },
+    "meaning": "您好吗？",
+    "example": "お元気ですか、最近どうですか？",
+    "bookmarked": false
+  }
+]

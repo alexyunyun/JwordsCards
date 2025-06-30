@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: transparent;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 防止内容溢出和背景残留 */
+.app-container {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: -1;
+}
+
+/* 纯白背景效果 */
+.glass {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.dark .glass {
+  background: rgba(40, 40, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Card flip animation */
+.card-flip {
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-flip.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(-180deg);
+}
+
+/* 确保背面内容布局与正面一致 */
+.card-back .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding-top: 3.5rem;
+  padding-bottom: 5rem;
+  padding-left: clamp(0.75rem, 3vw, 1.5rem);
+  padding-right: clamp(0.75rem, 3vw, 1.5rem);
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+
+/* Button hover effects */
+.btn-hover {
+  transition: all 0.3s ease;
+}
+
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Font families */
+.font-japanese {
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+}
+
+.font-chinese {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* 卡片样式优化 */
+.card-container {
+  perspective: 1000px;
+}
+
+/* 正面内容样式 */
+.card-front .card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  padding-top: 3.5rem;
+  padding-bottom: 5rem;
+  padding-left: clamp(0.75rem, 3vw, 1.5rem);
+  padding-right: clamp(0.75rem, 3vw, 1.5rem);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* 文字样式优化 - 响应式字体大小 */
+.word-main {
+  font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: clamp(0.5rem, 2vh, 1rem);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  word-break: break-word;
+  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif !important;
+  color: inherit !important;
+  display: block !important;
+  visibility: visible !important;
+}
+
+.word-pronunciation {
+  font-size: clamp(0.875rem, 3vw, 1.125rem);
+  line-height: 1.4;
+  margin-bottom: clamp(0.25rem, 1vh, 0.5rem);
+  opacity: 0.9;
+}
+
+.word-katakana {
+  font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+  line-height: 1.4;
+  opacity: 0.7;
+}
+
+.word-meaning {
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: clamp(0.5rem, 2vh, 1rem);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+  word-break: break-word;
+}
+
+.word-example {
+  font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+  line-height: 1.6;
+  opacity: 0.8;
+  max-width: 100%;
+  word-break: break-word;
+}
+
+/* 按钮样式优化 */
+.nav-button {
+  padding: clamp(0.5rem, 2vw, 1rem);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 10;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.nav-button:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.nav-button svg {
+  width: clamp(1rem, 4vw, 1.5rem);
+  height: clamp(1rem, 4vw, 1.5rem);
+  color: #333;
+  stroke-width: 2;
+}
+
+.dark .nav-button {
+  background: rgba(40, 40, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .nav-button:hover {
+  background: rgba(60, 60, 60, 0.95);
+}
+
+.dark .nav-button svg {
+  color: #fff;
+}
+
+/* 拖拽区域样式 */
+.drag-region {
+  -webkit-app-region: drag;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* 进度指示器样式 */
+.progress-indicator {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
+
+.dark .progress-indicator {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 控制栏背景样式 */
+.control-bar-bg {
+  background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+  backdrop-filter: blur(8px);
+}
+
+.dark .control-bar-bg {
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%);
+}
