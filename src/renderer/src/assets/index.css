@@ -101,12 +101,12 @@ body {
 .card-back .card-content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   text-align: center;
   height: 100%;
-  padding-top: 3.5rem;
-  padding-bottom: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
   padding-left: clamp(0.75rem, 3vw, 1.5rem);
   padding-right: clamp(0.75rem, 3vw, 1.5rem);
   box-sizing: border-box;
@@ -169,12 +169,12 @@ body {
 .card-front .card-content {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   text-align: center;
   height: 100%;
-  padding-top: 3.5rem;
-  padding-bottom: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
   padding-left: clamp(0.75rem, 3vw, 1.5rem);
   padding-right: clamp(0.75rem, 3vw, 1.5rem);
   box-sizing: border-box;
@@ -199,6 +199,39 @@ body {
   color: inherit !important;
   display: block !important;
   visibility: visible !important;
+}
+
+/* 响应式媒体查询 */
+@media (max-width: 480px) {
+  .card-front .card-content,
+  .card-back .card-content {
+    padding-top: 1.5rem;
+    padding-bottom: 3.5rem;
+  }
+  
+  .word-main {
+    font-size: 1.3rem !important;
+  }
+  
+  .word-meaning {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-front .card-content,
+  .card-back .card-content {
+    padding-top: 2.5rem;
+    padding-bottom: 4.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-front .card-content,
+  .card-back .card-content {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
 }
 
 .word-pronunciation {
@@ -298,14 +331,4 @@ body {
 .dark .progress-indicator {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* 控制栏背景样式 */
-.control-bar-bg {
-  background: linear-gradient(to top, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
-  backdrop-filter: blur(8px);
-}
-
-.dark .control-bar-bg {
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0) 100%);
 }

@@ -30,7 +30,7 @@ const ControlBar: React.FC<ControlBarProps> = ({
 }) => {
   return (
     <div
-      className="absolute bottom-0 left-0 right-0 z-10 control-bar-bg"
+      className="absolute bottom-0 left-0 right-0 z-10"
       style={{
         WebkitAppRegion: 'no-drag',
         padding: 'clamp(0.5rem, 2vw, 0.75rem)',

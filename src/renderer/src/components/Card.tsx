@@ -63,8 +63,8 @@ function Card({
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-4">
-      <div className="relative w-full h-full max-w-full">
+    <div className="w-full h-full flex items-center justify-center p-3">
+      <div className="relative w-full h-full max-w-[420px] max-h-[280px] min-w-[320px] min-h-[220px]">
         {/* 完整卡片容器 */}
         <div className="w-full h-full glass rounded-2xl shadow-2xl overflow-hidden relative">
           {/* 右上角主题切换按钮 */}
