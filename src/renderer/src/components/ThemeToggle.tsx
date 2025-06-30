@@ -35,16 +35,28 @@ function ThemeToggle({ theme, onToggle }: ThemeToggleProps): JSX.Element {
           <svg
             fill="currentColor"
             viewBox="0 0 24 24"
+            width="20"
+            height="20"
           >
-            <path d="M12,18.5A6.5,6.5,0,1,1,18.5,12,6.51,6.51,0,0,1,12,18.5ZM12,7A5,5,0,1,0,17,12,5,5,0,0,0,12,7Z" />
-            <path d="M12,1a1,1,0,0,0-1,1V4a1,1,0,0,0,2,0V2A1,1,0,0,0,12,1Z" />
-            <path d="M12,20a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V21A1,1,0,0,0,12,20Z" />
-            <path d="M6.34,7.76A1,1,0,0,0,4.93,6.34L3.51,7.76a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0Z" />
-            <path d="M19.07,17.66a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.41l1.42,1.42a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41Z" />
-            <path d="M1,13H4a1,1,0,0,0,0-2H1a1,1,0,0,0,0,2Z" />
-            <path d="M20,13h3a1,1,0,0,0,0-2H20a1,1,0,0,0,0,2Z" />
-            <path d="M4.93,17.66,3.51,19.07a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0L6.34,19.07a1,1,0,0,0,0-1.41A1,1,0,0,0,4.93,17.66Z" />
-            <path d="M17.66,7.76l1.42-1.42a1,1,0,0,0,0-1.41,1,1,0,0,0-1.41,0L16.25,6.34a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.76Z" />
+            {/* 太阳中心圆 */}
+            <circle cx="12" cy="12" r="5" />
+            {/* 8个方向的光线，均匀分布 */}
+            {/* 上 */}
+            <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* 右上 */}
+            <line x1="18.36" y1="5.64" x2="16.95" y2="7.05" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* 右 */}
+            <line x1="23" y1="12" x2="21" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* 右下 */}
+            <line x1="18.36" y1="18.36" x2="16.95" y2="16.95" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* 下 */}
+            <line x1="12" y1="23" x2="12" y2="21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* 左下 */}
+            <line x1="5.64" y1="18.36" x2="7.05" y2="16.95" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* 左 */}
+            <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            {/* 左上 */}
+            <line x1="5.64" y1="5.64" x2="7.05" y2="7.05" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         )}
       </motion.div>

@@ -22,7 +22,7 @@ function createWindow(): void {
     x: savedBounds.x,
     y: savedBounds.y,
     show: false,
-    frame: true, // 恢复系统标题栏
+    titleBarStyle: process.platform === 'darwin' ? 'customButtonsOnHover' : 'default', // macOS悬停时显示按钮
     alwaysOnTop: true, // 始终置顶
     resizable: false,
     transparent: true,

@@ -8,6 +8,13 @@ import './styles/App.css';
 
 function App(): JSX.Element {
   const [loading, setLoading] = useState(true);
+  const [isMacOS, setIsMacOS] = useState(false);
+
+  // 检测操作系统
+  useEffect(() => {
+    // 通过用户代理字符串检测 macOS
+    setIsMacOS(navigator.userAgent.includes('Mac'));
+  }, []);
   const { theme, toggleTheme } = useTheme();
   const {
     words,
@@ -90,7 +97,10 @@ function App(): JSX.Element {
         {/* 拖拽区域 */}
         <div
           className="drag-region"
-          style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
+          style={{
+            '--drag-left': isMacOS ? '60%' : '50%',
+            '--drag-width': isMacOS ? '40%' : '60%',
+          } as React.CSSProperties}
         />
 
         {/* 单词卡片 */}

@@ -5,14 +5,6 @@
   position: relative;
 }
 
-.app.light {
-  /* 亮色主题 */
-}
-
-.app.dark {
-  /* 暗色主题 */
-}
-
 .app-container {
   width: 100vw;
   height: 100vh;
@@ -31,8 +23,6 @@
   height: 2rem;
   z-index: 10;
   cursor: move;
-  -webkit-app-region: drag;
-  /* 避免遮挡按钮区域 */
   pointer-events: none;
 }
 
@@ -40,9 +30,9 @@
   content: '';
   position: absolute;
   top: 0;
-  left: 50%;
+  left: var(--drag-left, 50%);
   transform: translateX(-50%);
-  width: 60%;
+  width: var(--drag-width, 60%);
   height: 100%;
   pointer-events: auto;
   -webkit-app-region: drag;

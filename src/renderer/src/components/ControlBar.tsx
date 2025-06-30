@@ -95,10 +95,7 @@ const ControlBar: React.FC<ControlBarProps> = ({
                 onBookmark();
               }}
           title={isBookmarked ? '取消收藏 (B)' : '添加收藏 (B)'}
-          className={isBookmarked
-            ? 'text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20'
-            : ''
-          }
+          className={isBookmarked ? 'bookmarked' : ''}
           size="sm"
         >
           <svg fill="currentColor" viewBox="0 0 24 24">

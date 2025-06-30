@@ -194,9 +194,13 @@ body {
   max-width: 100%;
   word-break: break-word;
   font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif !important;
-  color: inherit !important;
+  color: #1f2937 !important;
   display: block !important;
   visibility: visible !important;
+}
+
+.dark .word-main {
+  color: #ffffff !important;
 }
 
 /* 响应式媒体查询 */
@@ -237,12 +241,22 @@ body {
   line-height: 1.4;
   margin-bottom: clamp(0.25rem, 1vh, 0.5rem);
   opacity: 0.9;
+  color: #374151;
+}
+
+.dark .word-pronunciation {
+  color: #d1d5db;
 }
 
 .word-katakana {
   font-size: clamp(0.75rem, 2.5vw, 0.875rem);
   line-height: 1.4;
   opacity: 0.7;
+  color: #4b5563;
+}
+
+.dark .word-katakana {
+  color: #9ca3af;
 }
 
 .word-meaning {
@@ -253,6 +267,11 @@ body {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   max-width: 100%;
   word-break: break-word;
+  color: #1f2937;
+}
+
+.dark .word-meaning {
+  color: #ffffff;
 }
 
 .word-example {

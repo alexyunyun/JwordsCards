@@ -54,6 +54,10 @@
   color: #ef4444;
 }
 
+.dark .control-button.bookmarked {
+  color: #f87171;
+}
+
 .control-button.bookmarked:hover {
   background-color: #fef2f2;
 }

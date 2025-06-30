@@ -15,7 +15,3 @@
   justify-content: center;
   gap: clamp(0.5rem, 2vw, 0.75rem);
 }
-
-.control-item {
-  /* 控制项基础样式 */
-}

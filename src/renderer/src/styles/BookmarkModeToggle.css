@@ -39,6 +39,12 @@
   border-color: rgba(251, 191, 36, 0.5);
 }
 
+.dark .bookmark-toggle.active {
+  background-color: rgba(251, 191, 36, 0.3);
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.6);
+}
+
 .bookmark-toggle svg {
   width: 1.25rem;
   height: 1.25rem;
@@ -58,4 +64,9 @@
   align-items: center;
   justify-content: center;
   font-weight: 700;
+}
+
+.dark .bookmark-badge {
+  background-color: #fbbf24;
+  color: #000000;
 }

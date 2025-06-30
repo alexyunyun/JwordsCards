@@ -40,38 +40,49 @@
 .error-title {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #ffffff;
+  color: #1f2937;
   margin-bottom: 0.5rem;
 }
 
+.dark .error-title {
+  color: #ffffff;
+}
+
 .error-message {
-  color: rgba(255, 255, 255, 0.8);
+  color: #374151;
   margin-bottom: 1.5rem;
+}
+
+.dark .error-message {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .error-retry-button {
   padding: 0.5rem 1.5rem;
-  background-color: rgba(59, 130, 246, 0.2);
-  color: #93c5fd;
-  border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.95);
+  color: #374151;
+  border-radius: 0.5rem;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   cursor: pointer;
   transition: all 0.3s;
-  border: none;
 }
 
 .error-retry-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background-color: rgba(59, 130, 246, 0.3);
+  background-color: rgba(229, 231, 235, 0.95);
 }
 
 .dark .error-retry-button {
   background: rgba(40, 40, 40, 0.95);
+  color: #d1d5db;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dark .error-retry-button:hover {
+  background-color: rgba(55, 65, 81, 0.95);
 }
