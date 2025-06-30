@@ -4,6 +4,7 @@ import Loading from './components/Loading';
 import ErrorMessage from './components/ErrorMessage';
 import { useWordBank } from './hooks/useWordBank';
 import { useTheme } from './hooks/useTheme';
+import './styles/App.css';
 
 function App(): JSX.Element {
   const [loading, setLoading] = useState(true);
@@ -84,11 +85,11 @@ function App(): JSX.Element {
   }
 
   return (
-    <div className={`w-full h-full relative ${theme}`}>
-      <div className="app-container w-screen h-screen flex items-center justify-center relative overflow-hidden">
+    <div className={`app ${theme}`}>
+      <div className="app-container">
         {/* 拖拽区域 */}
         <div
-          className="absolute top-0 left-0 w-full h-8 z-20 cursor-move"
+          className="drag-region"
           style={{ WebkitAppRegion: 'drag' } as React.CSSProperties}
         />
 

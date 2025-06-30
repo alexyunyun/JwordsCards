@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import '../styles/BookmarkModeToggle.css';
 
 interface BookmarkModeToggleProps {
   bookmarkMode: boolean;
@@ -15,17 +16,14 @@ function BookmarkModeToggle({
   return (
     <motion.button
       onClick={onToggle}
-      className={`relative p-2 rounded-full glass btn-hover transition-all duration-300 ${
-        bookmarkMode
-          ? 'bg-yellow-500/50 text-yellow-600 border-yellow-400/50'
-          : 'text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white border-gray-300/50 dark:border-gray-600/50'
+      className={`bookmark-toggle ${
+        bookmarkMode ? 'active' : ''
       }`}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       title={bookmarkMode ? '退出收藏模式 (M)' : '进入收藏模式 (M)'}
     >
       <svg
-        className="w-5 h-5"
         fill={bookmarkMode ? 'currentColor' : 'none'}
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -43,7 +41,7 @@ function BookmarkModeToggle({
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold"
+          className="bookmark-badge"
         >
           {bookmarkCount > 99 ? '99+' : bookmarkCount}
         </motion.div>

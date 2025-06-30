@@ -1,0 +1,35 @@
+/* App组件样式 */
+.app {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.app.light {
+  /* 亮色主题 */
+}
+
+.app.dark {
+  /* 暗色主题 */
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.drag-region {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+  z-index: 20;
+  cursor: move;
+  -webkit-app-region: drag;
+}

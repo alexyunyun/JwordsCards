@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Word } from '../types';
+import '../styles/CardFace.css';
 
 interface CardFaceProps {
   word: Word;
@@ -9,15 +10,15 @@ interface CardFaceProps {
 const CardFace: React.FC<CardFaceProps> = ({ word, isBack = false }) => {
   if (isBack) {
     return (
-      <div className="card-back w-full h-full">
+      <div className="card-face card-back">
         <div className="card-content">
-          <div className="text-center max-w-full">
-            <h2 className="word-meaning text-gray-800 dark:text-white font-chinese">
+          <div className="card-text-container">
+            <h2 className="word-meaning font-chinese">
               {word.meaning}
             </h2>
             {word.example && (
-              <div className="word-example text-gray-700 dark:text-gray-200 mt-3">
-                <p className="font-japanese leading-relaxed">
+              <div className="word-example">
+                <p className="font-japanese">
                   {word.example}
                 </p>
               </div>
@@ -29,16 +30,16 @@ const CardFace: React.FC<CardFaceProps> = ({ word, isBack = false }) => {
   }
 
   return (
-    <div className="card-front w-full h-full">
+    <div className="card-face card-front">
       <div className="card-content">
-        <div className="text-center max-w-full">
-          <h1 className="word-main text-gray-800 dark:text-white font-japanese">
+        <div className="card-text-container">
+          <h1 className="word-main font-japanese">
             {word.word}
           </h1>
-          <p className="word-pronunciation text-gray-700 dark:text-gray-200">
+          <p className="word-pronunciation">
             {word.pronunciation.romaji}
           </p>
-          <p className="word-katakana text-gray-600 dark:text-gray-300">
+          <p className="word-katakana">
             {word.pronunciation.katakana}
           </p>
         </div>

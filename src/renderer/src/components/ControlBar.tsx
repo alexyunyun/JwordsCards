@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ControlButton from './ControlButton';
 import BookmarkModeToggle from './BookmarkModeToggle';
+import '../styles/ControlBar.css';
 
 interface ControlBarProps {
   onPrevious: () => void;
@@ -30,18 +31,15 @@ const ControlBar: React.FC<ControlBarProps> = ({
 }) => {
   return (
     <div
-      className="absolute bottom-0 left-0 right-0 z-10"
+      className="control-bar"
       style={{
         WebkitAppRegion: 'no-drag',
-        padding: 'clamp(0.5rem, 2vw, 0.75rem)',
       } as React.CSSProperties}
     >
-      <div
-        className="flex items-center justify-center"
-        style={{ gap: 'clamp(0.5rem, 2vw, 0.75rem)' }}
-      >
+      <div className="control-bar-content">
         {/* 书签模式切换 */}
         <motion.div
+          className="control-item"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -58,7 +56,7 @@ const ControlBar: React.FC<ControlBarProps> = ({
           title="上一个单词 (←)"
           size="sm"
         >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <svg fill="currentColor" viewBox="0 0 24 24">
             <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
           </svg>
         </ControlButton>
@@ -85,7 +83,7 @@ const ControlBar: React.FC<ControlBarProps> = ({
           title="下一个单词 (→ 或 空格)"
           size="sm"
         >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <svg fill="currentColor" viewBox="0 0 24 24">
             <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
           </svg>
         </ControlButton>
@@ -103,7 +101,7 @@ const ControlBar: React.FC<ControlBarProps> = ({
           }
           size="sm"
         >
-          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <svg fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
           </svg>
         </ControlButton>

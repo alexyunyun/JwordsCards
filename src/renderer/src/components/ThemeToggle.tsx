@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import type { Theme } from '../types';
+import '../styles/ThemeToggle.css';
 
 interface ThemeToggleProps {
   theme: Theme;
@@ -10,12 +11,13 @@ function ThemeToggle({ theme, onToggle }: ThemeToggleProps): JSX.Element {
   return (
     <motion.button
       onClick={onToggle}
-      className="p-2 rounded-full text-gray-700 dark:text-gray-200 bg-white/20 dark:bg-gray-800/20 backdrop-blur-md border border-gray-200/30 dark:border-gray-700/30 hover:bg-white/30 dark:hover:bg-gray-800/30 transition-all duration-300"
+      className="theme-toggle"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       title={theme === 'dark' ? '切换到亮色模式 (T)' : '切换到暗色模式 (T)'}
     >
       <motion.div
+        className="theme-toggle-icon"
         initial={false}
         animate={{ rotate: theme === 'dark' ? 0 : 180 }}
         transition={{ duration: 0.3 }}
@@ -23,7 +25,6 @@ function ThemeToggle({ theme, onToggle }: ThemeToggleProps): JSX.Element {
         {theme === 'dark' ? (
           // 月亮图标 (暗色模式)
           <svg
-            className="w-4 h-4"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
@@ -32,7 +33,6 @@ function ThemeToggle({ theme, onToggle }: ThemeToggleProps): JSX.Element {
         ) : (
           // 太阳图标 (亮色模式)
           <svg
-            className="w-4 h-4"
             fill="currentColor"
             viewBox="0 0 24 24"
           >

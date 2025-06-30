@@ -5,6 +5,7 @@ import ThemeToggle from './ThemeToggle';
 import ProgressIndicator from './ProgressIndicator';
 import FlipCard from './FlipCard';
 import ControlBar from './ControlBar';
+import '../styles/Card.css';
 
 interface CardProps {
   word: Word;
@@ -63,16 +64,16 @@ function Card({
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-3">
-      <div className="relative w-full h-full max-w-[420px] max-h-[280px] min-w-[320px] min-h-[220px]">
+    <div className="card-wrapper">
+      <div className="card-container">
         {/* 完整卡片容器 */}
-        <div className="w-full h-full glass rounded-2xl shadow-2xl overflow-hidden relative">
+        <div className="card-main">
           {/* 右上角主题切换按钮 */}
           <div
-            className="absolute top-3 right-3 z-20"
+            className="theme-toggle-container"
             style={{ WebkitAppRegion: 'no-drag' } as React.CSSProperties}
           >
-            <div className="w-8 h-8 flex items-center justify-center">
+            <div className="theme-toggle-wrapper">
               <ThemeToggle
                 theme={theme}
                 onToggle={onToggleTheme}

@@ -1,0 +1,58 @@
+/* Loading组件样式 */
+.loading-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-content {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dark .loading-content {
+  background: rgba(40, 40, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.loading-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 1rem;
+  font-size: 1.125rem;
+  animation: pulse-opacity 1.5s infinite alternate;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-opacity {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}

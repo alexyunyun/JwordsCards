@@ -1,0 +1,76 @@
+/* ControlButton组件样式 */
+.control-button {
+  border-radius: 50%;
+  color: #374151;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-button:hover {
+  background-color: #e5e7eb;
+}
+
+.control-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dark .control-button {
+  color: #d1d5db;
+}
+
+.dark .control-button:hover {
+  background-color: #374151;
+}
+
+.control-button-sm {
+  padding: 0.5rem;
+}
+
+.control-button-md {
+  padding: 0.5rem;
+}
+
+.control-button-lg {
+  padding: 0.75rem;
+}
+
+.control-button svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.control-button-lg svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.control-button.bookmarked {
+  color: #ef4444;
+}
+
+.control-button.bookmarked:hover {
+  background-color: #fef2f2;
+}
+
+.dark .control-button.bookmarked:hover {
+  background-color: rgba(185, 28, 28, 0.2);
+}
+
+.control-button.playing {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

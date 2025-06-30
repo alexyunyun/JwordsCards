@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import '../styles/ErrorMessage.css';
 
 interface ErrorMessageProps {
   message: string;
@@ -7,15 +8,14 @@ interface ErrorMessageProps {
 
 function ErrorMessage({ message, onRetry }: ErrorMessageProps): JSX.Element {
   return (
-    <div className="w-full h-full flex items-center justify-center p-4">
+    <div className="error-container">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="glass rounded-xl p-8 text-center max-w-md"
+        className="error-content"
       >
-        <div className="text-red-400 mb-4">
+        <div className="error-icon">
           <svg
-            className="w-16 h-16 mx-auto"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
@@ -23,14 +23,14 @@ function ErrorMessage({ message, onRetry }: ErrorMessageProps): JSX.Element {
           </svg>
         </div>
 
-        <h3 className="text-xl font-semibold text-white mb-2">出现错误</h3>
+        <h3 className="error-title">出现错误</h3>
 
-        <p className="text-white/80 mb-6">{message}</p>
+        <p className="error-message">{message}</p>
 
         {onRetry && (
           <motion.button
             onClick={onRetry}
-            className="px-6 py-2 bg-blue-500/20 text-blue-300 rounded-lg glass btn-hover transition-all duration-300 hover:bg-blue-500/30"
+            className="error-retry-button"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

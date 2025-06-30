@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import '../styles/ControlButton.css';
 
 interface ControlButtonProps {
   onClick: (e?: React.MouseEvent) => void;
@@ -18,24 +19,8 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   children,
   size = 'md'
 }) => {
-  const sizeClasses = {
-    sm: 'p-2',
-    md: 'p-2',
-    lg: 'p-3'
-  };
-
-  const baseClasses = `
-    ${sizeClasses[size]} 
-    rounded-full 
-    text-gray-700 
-    dark:text-gray-200 
-    hover:bg-gray-200 
-    dark:hover:bg-gray-700 
-    transition-all 
-    duration-200 
-    disabled:opacity-50 
-    disabled:cursor-not-allowed
-  `;
+  const sizeClass = `control-button-${size}`;
+  const baseClasses = `control-button ${sizeClass}`;
 
   return (
     <motion.button

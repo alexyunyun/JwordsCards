@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/ProgressIndicator.css';
 
 interface ProgressIndicatorProps {
   currentIndex: number;
@@ -12,11 +13,11 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
   bookmarkMode
 }) => {
   return (
-    <div className="absolute top-3 left-3 z-15">
-      <div className="text-gray-700 dark:text-gray-200 text-sm font-medium bg-white/20 dark:bg-gray-800/20 backdrop-blur-md rounded-full px-3 py-1 border border-gray-200/30 dark:border-gray-700/30">
+    <div className="progress-indicator">
+      <div className="progress-content">
         {currentIndex + 1} / {totalWords}
         {bookmarkMode && (
-          <span className="ml-2 text-yellow-500 font-bold">📚</span>
+          <span className="bookmark-indicator">📚</span>
         )}
       </div>
     </div>
