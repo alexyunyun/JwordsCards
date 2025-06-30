@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import '../styles/BookmarkModeToggle.css';
 
@@ -16,9 +15,7 @@ function BookmarkModeToggle({
   return (
     <motion.button
       onClick={onToggle}
-      className={`bookmark-toggle ${
-        bookmarkMode ? 'active' : ''
-      }`}
+      className={`bookmark-toggle ${bookmarkMode ? 'active' : ''}`}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       title={bookmarkMode ? '退出收藏模式 (M)' : '进入收藏模式 (M)'}

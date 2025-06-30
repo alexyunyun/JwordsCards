@@ -1,12 +1,12 @@
 /* ControlBar组件样式 */
 .control-bar {
   position: absolute;
-  bottom: 0;
+  bottom: 0.2rem;
   left: 0;
   right: 0;
   z-index: 10;
   -webkit-app-region: no-drag;
-  padding: clamp(0.5rem, 2vw, 0.75rem);
+  padding: clamp(0.65rem, 2.5vw, 1rem);
 }
 
 .control-bar-content {

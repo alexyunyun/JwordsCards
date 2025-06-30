@@ -113,8 +113,6 @@ body {
   position: relative;
 }
 
-
-
 /* Button hover effects */
 .btn-hover {
   transition: all 0.3s ease;
@@ -208,11 +206,11 @@ body {
     padding-top: 1.5rem;
     padding-bottom: 3.5rem;
   }
-  
+
   .word-main {
     font-size: 1.3rem !important;
   }
-  
+
   .word-meaning {
     font-size: 1rem;
   }
@@ -325,7 +323,8 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 2rem;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.6rem;
+  display: flex;
 }
 
 .dark .progress-indicator {

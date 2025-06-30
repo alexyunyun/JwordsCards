@@ -9,8 +9,8 @@ const store = new Store();
 function createWindow(): void {
   // 获取保存的窗口位置，默认右下角
   const savedBounds = store.get('windowBounds', {
-    width: 600,
-    height: 320,
+    width: 640,
+    height: 360,
     x: undefined,
     y: undefined,
   }) as { width: number; height: number; x?: number; y?: number };

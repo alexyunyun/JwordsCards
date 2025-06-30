@@ -42,10 +42,12 @@
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
+    "electron-positioner": "^4.1.0",
     "electron-store": "^8.1.0",
     "framer-motion": "^10.16.16",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-speech-kit": "^3.0.1"
   },
   "build": {
     "appId": "com.jwordcards.app",

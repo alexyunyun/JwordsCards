@@ -1,8 +1,8 @@
 /* ProgressIndicator组件样式 */
 .progress-indicator {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: 1.5rem;
+  left: 1rem;
   z-index: 15;
 }
 
