@@ -2,10 +2,16 @@ import { app, shell, BrowserWindow, ipcMain, screen } from 'electron';
 import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import Store from 'electron-store';
-import icon from '../../resources/icon.png?asset';
+import icon from '../../resources/icon.png?asset'
+const iconMac = join(__dirname, '../../resources/icon.icns');
 
 const store = new Store();
 let mainWindow: BrowserWindow | null = null;
+
+// 设置应用名称（必须在app.whenReady()之前设置）
+if (process.platform === 'darwin') {
+  app.setName('JWordCards');
+}
 
 function createWindow(): void {
   // 获取保存的窗口位置，默认右下角
@@ -29,7 +35,8 @@ function createWindow(): void {
     resizable: false,
     transparent: true,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    icon: process.platform === 'darwin' ? iconMac : icon, // 根据平台使用不同图标
+    title: 'JWordCards', // 设置应用标题
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,
@@ -93,6 +100,16 @@ function createWindow(): void {
 app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.jwordcards.app');
+  
+  // 设置应用详细信息（macOS）
+  if (process.platform === 'darwin') {
+    app.setAboutPanelOptions({
+      applicationName: 'JWordCards',
+      applicationVersion: '1.0.0',
+      copyright: 'Copyright © 2024 JWordCards',
+      credits: '日语单词学习应用'
+    });
+  }
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.

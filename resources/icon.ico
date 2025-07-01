@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <!-- 主背景渐变 -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <!-- 卡片渐变 -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#f8fafc;stop-opacity:0.9" />
+    </linearGradient>
+    <!-- 阴影滤镜 -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- 背景圆角矩形 -->
+  <rect width="256" height="256" rx="48" fill="url(#bgGrad)"/>
+  
+  <!-- 主卡片 -->
+  <rect x="48" y="64" width="120" height="80" rx="8" fill="url(#cardGrad)" filter="url(#shadow)" transform="rotate(-5 108 104)"/>
+  
+  <!-- 后卡片（营造层次感） -->
+  <rect x="88" y="112" width="120" height="80" rx="8" fill="url(#cardGrad)" opacity="0.7" filter="url(#shadow)" transform="rotate(5 148 152)"/>
+  
+  <!-- 日文字符 あ -->
+  <text x="108" y="115" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="32" font-weight="500" text-anchor="middle" fill="#4338ca" transform="rotate(-5 108 104)">あ</text>
+  
+  <!-- 英文字符 A -->
+  <text x="148" y="163" font-family="'Inter', 'Arial', sans-serif" font-size="28" font-weight="600" text-anchor="middle" fill="#7c3aed" transform="rotate(5 148 152)">A</text>
+  
+  <!-- 装饰性元素 - 小圆点 -->
+  <circle cx="80" cy="200" r="4" fill="#ffffff" opacity="0.6"/>
+  <circle cx="100" cy="210" r="3" fill="#ffffff" opacity="0.4"/>
+  <circle cx="176" cy="200" r="4" fill="#ffffff" opacity="0.6"/>
+  <circle cx="196" cy="210" r="3" fill="#ffffff" opacity="0.4"/>
+  
+  <!-- 应用名称 -->
+  <text x="128" y="240" font-family="'Inter', 'Arial', sans-serif" font-size="16" font-weight="600" text-anchor="middle" fill="#ffffff" opacity="0.9">JWords</text>
+</svg>
