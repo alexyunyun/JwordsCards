@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ControlButton from './ControlButton';
 import BookmarkModeToggle from './BookmarkModeToggle';
+import OpacitySlider from './OpacitySlider';
 import '../styles/ControlBar.css';
 
 interface ControlBarProps {
@@ -15,6 +16,8 @@ interface ControlBarProps {
   bookmarkMode: boolean;
   onToggleBookmarkMode: () => void;
   bookmarkCount: number;
+  opacity: number;
+  onOpacityChange: (opacity: number) => void;
 }
 
 const ControlBar: React.FC<ControlBarProps> = ({
@@ -27,14 +30,18 @@ const ControlBar: React.FC<ControlBarProps> = ({
   isSupported,
   bookmarkMode,
   onToggleBookmarkMode,
-  bookmarkCount
+  bookmarkCount,
+  opacity,
+  onOpacityChange,
 }) => {
   return (
     <div
       className="control-bar"
-      style={{
-        WebkitAppRegion: 'no-drag',
-      } as React.CSSProperties}
+      style={
+        {
+          WebkitAppRegion: 'no-drag',
+        } as React.CSSProperties
+      }
     >
       <div className="control-bar-content">
         {/* 书签模式切换 */}
@@ -56,7 +63,10 @@ const ControlBar: React.FC<ControlBarProps> = ({
           title="上一个单词 (←)"
           size="sm"
         >
-          <svg fill="currentColor" viewBox="0 0 24 24">
+          <svg
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" />
           </svg>
         </ControlButton>
@@ -83,7 +93,10 @@ const ControlBar: React.FC<ControlBarProps> = ({
           title="下一个单词 (→ 或 空格)"
           size="sm"
         >
-          <svg fill="currentColor" viewBox="0 0 24 24">
+          <svg
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
           </svg>
         </ControlButton>
@@ -91,17 +104,32 @@ const ControlBar: React.FC<ControlBarProps> = ({
         {/* 收藏按钮 */}
         <ControlButton
           onClick={(e?: React.MouseEvent) => {
-                e?.stopPropagation();
-                onBookmark();
-              }}
+            e?.stopPropagation();
+            onBookmark();
+          }}
           title={isBookmarked ? '取消收藏 (B)' : '添加收藏 (B)'}
           className={isBookmarked ? 'bookmarked' : ''}
           size="sm"
         >
-          <svg fill="currentColor" viewBox="0 0 24 24">
+          <svg
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
           </svg>
         </ControlButton>
+
+        {/* 透明度滑块 */}
+        <motion.div
+          className="control-item"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <OpacitySlider
+            opacity={opacity}
+            onChange={onOpacityChange}
+          />
+        </motion.div>
       </div>
     </div>
   );

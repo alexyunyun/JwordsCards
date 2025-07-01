@@ -13,6 +13,11 @@ const api = {
   setBookmark: (wordId: string, isBookmarked: boolean) =>
     ipcRenderer.invoke('set-bookmark', wordId, isBookmarked),
   getAllBookmarks: () => ipcRenderer.invoke('get-all-bookmarks'),
+
+  // Window opacity
+  setWindowOpacity: (opacity: number) =>
+    ipcRenderer.invoke('set-window-opacity', opacity),
+  getWindowOpacity: () => ipcRenderer.invoke('get-window-opacity'),
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to

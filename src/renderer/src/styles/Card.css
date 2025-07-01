@@ -20,24 +20,37 @@
   min-height: 220px;
 }
 
-.card-main {
+.card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: none;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  z-index: 1;
+}
+
+.dark .card-background {
+  background: rgba(40, 40, 40, 0.95);
+  border: none;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3);
+}
+
+.card-main {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border-radius: 1rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   position: relative;
-}
-
-.dark .card-main {
-  background: rgba(40, 40, 40, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3);
+  z-index: 2;
 }
 
 .theme-toggle-container {

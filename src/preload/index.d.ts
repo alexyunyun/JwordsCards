@@ -9,6 +9,8 @@ declare global {
       getBookmark: (wordId: string) => Promise<boolean>;
       setBookmark: (wordId: string, isBookmarked: boolean) => Promise<boolean>;
       getAllBookmarks: () => Promise<string[]>;
+      setWindowOpacity: (opacity: number) => Promise<boolean>;
+      getWindowOpacity: () => Promise<number>;
     };
   }
 }

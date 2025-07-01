@@ -190,7 +190,7 @@ body {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: clamp(0.5rem, 2vh, 1rem);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   max-width: 100%;
   word-break: break-word;
   font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif !important;
@@ -201,6 +201,7 @@ body {
 
 .dark .word-main {
   color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* 响应式媒体查询 */
@@ -264,7 +265,7 @@ body {
   font-weight: 600;
   line-height: 1.4;
   margin-bottom: clamp(0.5rem, 2vh, 1rem);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1);
   max-width: 100%;
   word-break: break-word;
   color: #1f2937;
@@ -272,6 +273,7 @@ body {
 
 .dark .word-meaning {
   color: #ffffff;
+  text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.4);
 }
 
 .word-example {

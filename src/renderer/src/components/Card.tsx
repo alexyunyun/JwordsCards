@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTTS } from '../hooks/useTTS';
+import { useOpacity } from '../hooks/useOpacity';
 import type { Word, Theme } from '../types';
 import ThemeToggle from './ThemeToggle';
 import ProgressIndicator from './ProgressIndicator';
@@ -38,6 +39,7 @@ function Card({
 }: CardProps): JSX.Element {
   const [isFlipped, setIsFlipped] = useState(false);
   const { speak, isPlaying, isSupported } = useTTS();
+  const { opacity, updateOpacity } = useOpacity();
 
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
@@ -63,11 +65,14 @@ function Card({
     onPrevious();
   };
 
-
-
   return (
     <div className="card-wrapper">
       <div className="card-container">
+        {/* 背景层 */}
+        <div
+          className="card-background"
+          style={{ opacity: opacity }}
+        ></div>
         {/* 完整卡片容器 */}
         <div className="card-main">
           {/* 右上角主题切换按钮 */}
@@ -109,6 +114,8 @@ function Card({
             bookmarkMode={bookmarkMode}
             onToggleBookmarkMode={onToggleBookmarkMode}
             bookmarkCount={bookmarkCount}
+            opacity={opacity}
+            onOpacityChange={updateOpacity}
           />
         </div>
       </div>

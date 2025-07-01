@@ -14,4 +14,11 @@
   align-items: center;
   justify-content: center;
   gap: clamp(0.5rem, 2vw, 0.75rem);
+  flex-wrap: wrap;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

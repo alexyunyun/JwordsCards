@@ -1,10 +1,11 @@
-import { app, shell, BrowserWindow, ipcMain } from 'electron';
+import { app, shell, BrowserWindow, ipcMain, screen } from 'electron';
 import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 import Store from 'electron-store';
 import icon from '../../resources/icon.png?asset';
 
 const store = new Store();
+let mainWindow: BrowserWindow | null = null;
 
 function createWindow(): void {
   // 获取保存的窗口位置，默认右下角
@@ -16,13 +17,14 @@ function createWindow(): void {
   }) as { width: number; height: number; x?: number; y?: number };
 
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: savedBounds.width,
     height: savedBounds.height,
     x: savedBounds.x,
     y: savedBounds.y,
     show: false,
-    titleBarStyle: process.platform === 'darwin' ? 'customButtonsOnHover' : 'default', // macOS悬停时显示按钮
+    titleBarStyle:
+      process.platform === 'darwin' ? 'customButtonsOnHover' : 'default', // macOS悬停时显示按钮
     alwaysOnTop: true, // 始终置顶
     resizable: false,
     transparent: true,
@@ -38,7 +40,6 @@ function createWindow(): void {
 
   // 如果没有保存的位置，设置到右下角
   if (savedBounds.x === undefined || savedBounds.y === undefined) {
-    const { screen } = require('electron');
     const primaryDisplay = screen.getPrimaryDisplay();
     const { width: screenWidth, height: screenHeight } =
       primaryDisplay.workAreaSize;
@@ -50,7 +51,11 @@ function createWindow(): void {
   }
 
   mainWindow.on('ready-to-show', () => {
-    mainWindow.show();
+    // 确保窗口完全不透明，透明度由CSS背景层控制
+    if (mainWindow && !mainWindow.isDestroyed()) {
+      mainWindow.setOpacity(1.0);
+      mainWindow.show();
+    }
   });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -60,13 +65,17 @@ function createWindow(): void {
 
   // 保存窗口位置
   mainWindow.on('moved', () => {
-    const bounds = mainWindow.getBounds();
-    store.set('windowBounds', bounds);
+    if (mainWindow && !mainWindow.isDestroyed()) {
+      const bounds = mainWindow.getBounds();
+      store.set('windowBounds', bounds);
+    }
   });
 
   mainWindow.on('resized', () => {
-    const bounds = mainWindow.getBounds();
-    store.set('windowBounds', bounds);
+    if (mainWindow && !mainWindow.isDestroyed()) {
+      const bounds = mainWindow.getBounds();
+      store.set('windowBounds', bounds);
+    }
   });
 
   // HMR for renderer base on electron-vite cli.
@@ -121,6 +130,18 @@ app.whenReady().then(() => {
 
   ipcMain.handle('get-all-bookmarks', () => {
     return store.get('bookmarks', []) as string[];
+  });
+
+  // 移除窗口透明度控制，现在由CSS背景层控制透明度
+  // 保留IPC处理器以避免前端错误，但不执行任何操作
+  ipcMain.handle('set-window-opacity', () => {
+    // 不再控制窗口透明度
+    return true;
+  });
+
+  ipcMain.handle('get-window-opacity', () => {
+    // 返回默认值，实际透明度由CSS控制
+    return 0.95;
   });
 
   createWindow();
