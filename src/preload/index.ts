@@ -18,6 +18,11 @@ const api = {
   setWindowOpacity: (opacity: number) =>
     ipcRenderer.invoke('set-window-opacity', opacity),
   getWindowOpacity: () => ipcRenderer.invoke('get-window-opacity'),
+
+  // Word position memory
+  getWordPosition: () => ipcRenderer.invoke('get-word-position'),
+  setWordPosition: (position: { currentIndex: number; bookmarkMode: boolean }) =>
+    ipcRenderer.invoke('set-word-position', position),
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to

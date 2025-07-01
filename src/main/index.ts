@@ -11,7 +11,7 @@ function createWindow(): void {
   // 获取保存的窗口位置，默认右下角
   const savedBounds = store.get('windowBounds', {
     width: 640,
-    height: 360,
+    height: 340,
     x: undefined,
     y: undefined,
   }) as { width: number; height: number; x?: number; y?: number };
@@ -142,6 +142,16 @@ app.whenReady().then(() => {
   ipcMain.handle('get-window-opacity', () => {
     // 返回默认值，实际透明度由CSS控制
     return 0.95;
+  });
+
+  // 单词位置记忆功能
+  ipcMain.handle('get-word-position', () => {
+    return store.get('wordPosition', { currentIndex: 0, bookmarkMode: false });
+  });
+
+  ipcMain.handle('set-word-position', (_, position: { currentIndex: number; bookmarkMode: boolean }) => {
+    store.set('wordPosition', position);
+    return true;
   });
 
   createWindow();

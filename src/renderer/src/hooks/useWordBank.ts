@@ -23,12 +23,29 @@ export function useWordBank() {
         const savedBookmarks = (await window.api?.getAllBookmarks()) || [];
         setBookmarks(savedBookmarks);
 
+        // 加载保存的单词位置
+        const savedPosition = (await window.api?.getWordPosition?.()) || {
+          currentIndex: 0,
+          bookmarkMode: false,
+        };
+
+        // 获取显示的单词列表
+        const displayWords = savedPosition.bookmarkMode
+          ? words.filter((word) => savedBookmarks.includes(word.id))
+          : words;
+
+        // 确保索引在有效范围内
+        const validIndex = Math.min(
+          savedPosition.currentIndex,
+          Math.max(0, displayWords.length - 1)
+        );
+
         // 设置初始状态
         setState({
           words,
-          currentIndex: 0,
-          currentWord: words[0] || null,
-          bookmarkMode: false,
+          currentIndex: validIndex,
+          currentWord: displayWords[validIndex] || words[0] || null,
+          bookmarkMode: savedPosition.bookmarkMode,
         });
       } catch (error) {
         console.error('Failed to load word bank data:', error);
@@ -59,6 +76,15 @@ export function useWordBank() {
     return state.words;
   }, [state.words, state.bookmarkMode, bookmarks]);
 
+  // 保存当前位置到存储
+  const savePosition = useCallback(async (currentIndex: number, bookmarkMode: boolean) => {
+    try {
+      await window.api?.setWordPosition?.({ currentIndex, bookmarkMode });
+    } catch (error) {
+      console.error('Failed to save word position:', error);
+    }
+  }, []);
+
   // 下一个单词
   const nextWord = useCallback(() => {
     const displayWords = getDisplayWords();
@@ -66,13 +92,18 @@ export function useWordBank() {
 
     setState((prev) => {
       const newIndex = (prev.currentIndex + 1) % displayWords.length;
-      return {
+      const newState = {
         ...prev,
         currentIndex: newIndex,
         currentWord: displayWords[newIndex],
       };
+      
+      // 保存位置
+      savePosition(newIndex, prev.bookmarkMode);
+      
+      return newState;
     });
-  }, [getDisplayWords]);
+  }, [getDisplayWords, savePosition]);
 
   // 上一个单词
   const previousWord = useCallback(() => {
@@ -84,13 +115,18 @@ export function useWordBank() {
         prev.currentIndex === 0
           ? displayWords.length - 1
           : prev.currentIndex - 1;
-      return {
+      const newState = {
         ...prev,
         currentIndex: newIndex,
         currentWord: displayWords[newIndex],
       };
+      
+      // 保存位置
+      savePosition(newIndex, prev.bookmarkMode);
+      
+      return newState;
     });
-  }, [getDisplayWords]);
+  }, [getDisplayWords, savePosition]);
 
   // 随机单词
   const randomWord = useCallback(() => {
@@ -98,12 +134,19 @@ export function useWordBank() {
     if (displayWords.length === 0) return;
 
     const randomIndex = Math.floor(Math.random() * displayWords.length);
-    setState((prev) => ({
-      ...prev,
-      currentIndex: randomIndex,
-      currentWord: displayWords[randomIndex],
-    }));
-  }, [getDisplayWords]);
+    setState((prev) => {
+      const newState = {
+        ...prev,
+        currentIndex: randomIndex,
+        currentWord: displayWords[randomIndex],
+      };
+      
+      // 保存位置
+      savePosition(randomIndex, prev.bookmarkMode);
+      
+      return newState;
+    });
+  }, [getDisplayWords, savePosition]);
 
   // 跳转到指定单词
   const goToWord = useCallback(
@@ -111,13 +154,20 @@ export function useWordBank() {
       const displayWords = getDisplayWords();
       if (index < 0 || index >= displayWords.length) return;
 
-      setState((prev) => ({
-        ...prev,
-        currentIndex: index,
-        currentWord: displayWords[index],
-      }));
+      setState((prev) => {
+        const newState = {
+          ...prev,
+          currentIndex: index,
+          currentWord: displayWords[index],
+        };
+        
+        // 保存位置
+        savePosition(index, prev.bookmarkMode);
+        
+        return newState;
+      });
     },
-    [getDisplayWords],
+    [getDisplayWords, savePosition],
   );
 
   // 切换书签
@@ -148,19 +198,23 @@ export function useWordBank() {
         ? prev.words.filter((word) => bookmarks.includes(word.id))
         : prev.words;
 
-      // 如果书签模式下没有收藏的单词，保持在普通模式
       if (newBookmarkMode && displayWords.length === 0) {
         return prev;
       }
 
-      return {
+      const newState = {
         ...prev,
         bookmarkMode: newBookmarkMode,
         currentIndex: 0,
         currentWord: displayWords[0] || null,
       };
+      
+      // 保存位置
+      savePosition(0, newBookmarkMode);
+      
+      return newState;
     });
-  }, [bookmarks]);
+  }, [bookmarks, savePosition]);
 
   // 检查是否已收藏
   const isBookmarked = useCallback(
