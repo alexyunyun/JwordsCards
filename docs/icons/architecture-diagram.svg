@@ -1,0 +1,81 @@
+<svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="600" height="400" fill="url(#bgGradient)" rx="10"/>
+  
+  <!-- Title -->
+  <text x="300" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">JWordCards 系统兼容性图表</text>
+  
+  <!-- Windows Section -->
+  <rect x="50" y="60" width="150" height="120" rx="8" fill="#0078d4" opacity="0.1" stroke="#0078d4" stroke-width="2"/>
+  <text x="125" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#0078d4">Windows</text>
+  <text x="60" y="100" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Windows 10+</text>
+  <text x="60" y="115" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ 64位 (x64)</text>
+  <text x="60" y="130" font-family="Arial, sans-serif" font-size="11" fill="#dc3545">✗ 32位系统</text>
+  <text x="60" y="145" font-family="Arial, sans-serif" font-size="11" fill="#dc3545">✗ Windows 7/8</text>
+  <text x="125" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Setup.exe / Portable.exe</text>
+  
+  <!-- macOS Section -->
+  <rect x="225" y="60" width="150" height="120" rx="8" fill="#333" opacity="0.1" stroke="#333" stroke-width="2"/>
+  <text x="300" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">macOS</text>
+  <text x="235" y="100" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ macOS 10.14+</text>
+  <text x="235" y="115" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Intel (x64)</text>
+  <text x="235" y="130" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Apple Silicon (ARM64)</text>
+  <text x="300" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Intel: .dmg</text>
+  <text x="300" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">ARM64: -arm64.dmg</text>
+  
+  <!-- Linux Section -->
+  <rect x="400" y="60" width="150" height="120" rx="8" fill="#FCC624" opacity="0.1" stroke="#FCC624" stroke-width="2"/>
+  <text x="475" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#E67E22">Linux</text>
+  <text x="410" y="100" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ Ubuntu 18.04+</text>
+  <text x="410" y="115" font-family="Arial, sans-serif" font-size="11" fill="#333">✓ x86_64 (amd64)</text>
+  <text x="410" y="130" font-family="Arial, sans-serif" font-size="11" fill="#dc3545">✗ 32位 (i386)</text>
+  <text x="410" y="145" font-family="Arial, sans-serif" font-size="11" fill="#dc3545">✗ ARM64</text>
+  <text x="475" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">.AppImage (推荐)</text>
+  
+  <!-- Architecture Flow -->
+  <text x="300" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">架构支持流程图</text>
+  
+  <!-- Flow diagram -->
+  <rect x="50" y="240" width="100" height="40" rx="5" fill="#e3f2fd" stroke="#1976d2" stroke-width="1"/>
+  <text x="100" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#1976d2">检测系统</text>
+  
+  <path d="M150 260 L200 260" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <rect x="200" y="240" width="100" height="40" rx="5" fill="#fff3e0" stroke="#f57c00" stroke-width="1"/>
+  <text x="250" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#f57c00">检查架构</text>
+  
+  <path d="M300 260 L350 260" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <rect x="350" y="240" width="100" height="40" rx="5" fill="#e8f5e8" stroke="#388e3c" stroke-width="1"/>
+  <text x="400" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#388e3c">选择安装包</text>
+  
+  <path d="M450 260 L500 260" stroke="#666" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <rect x="500" y="240" width="80" height="40" rx="5" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1"/>
+  <text x="540" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#7b1fa2">安装</text>
+  
+  <!-- Legend -->
+  <text x="50" y="320" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">图例说明：</text>
+  <circle cx="60" cy="340" r="6" fill="#28a745"/>
+  <text x="75" y="345" font-family="Arial, sans-serif" font-size="12" fill="#333">支持的系统/架构</text>
+  
+  <circle cx="200" cy="340" r="6" fill="#dc3545"/>
+  <text x="215" y="345" font-family="Arial, sans-serif" font-size="12" fill="#333">不支持的系统/架构</text>
+  
+  <rect x="350" y="335" width="12" height="12" fill="#ffc107"/>
+  <text x="370" y="345" font-family="Arial, sans-serif" font-size="12" fill="#333">需要额外配置</text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+</svg>
