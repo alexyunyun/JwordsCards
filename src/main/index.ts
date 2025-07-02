@@ -14,26 +14,29 @@ if (process.platform === 'darwin') {
 }
 
 function createWindow(): void {
-  // 强制使用新的窗口尺寸，清除旧缓存
-  store.delete('windowBounds'); // 清除旧的窗口尺寸缓存
-  const savedBounds = {
+  // 获取保存的窗口尺寸，如果没有则使用默认值
+  const savedBounds = store.get('windowBounds', {
     width: 360,
     height: 220,
     x: undefined,
     y: undefined,
-  };
+  }) as { width: number; height: number; x?: number; y?: number };
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: savedBounds.width,
     height: savedBounds.height,
+    minWidth: 280, // 最小宽度，确保内容可读性
+    minHeight: 180, // 最小高度，确保控制栏可见
+    maxWidth: 800, // 最大宽度，避免过度拉伸
+    maxHeight: 600, // 最大高度，保持合理比例
     x: savedBounds.x,
     y: savedBounds.y,
     show: false,
     titleBarStyle:
       process.platform === 'darwin' ? 'customButtonsOnHover' : 'default', // macOS悬停时显示按钮
     alwaysOnTop: true, // 始终置顶
-    resizable: false,
+    resizable: true, // 启用窗口大小调整
     transparent: true, // 保持透明窗口
     backgroundColor: '#00000000', // 设置透明背景色
     autoHideMenuBar: true,

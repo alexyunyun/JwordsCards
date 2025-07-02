@@ -50,8 +50,8 @@
 
 .theme-toggle-container {
   position: absolute;
-  top: 1.5rem;
-  right: 1rem;
+  top: clamp(0.75rem, 3vw, 1.5rem);
+  right: clamp(0.5rem, 2vw, 1rem);
   z-index: 20;
   -webkit-app-region: no-drag;
 }
