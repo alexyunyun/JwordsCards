@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ControlButton from './ControlButton';
 import BookmarkModeToggle from './BookmarkModeToggle';
-import OpacitySlider from './OpacitySlider';
 import '../styles/ControlBar.css';
 
 interface ControlBarProps {
@@ -16,8 +15,6 @@ interface ControlBarProps {
   bookmarkMode: boolean;
   onToggleBookmarkMode: () => void;
   bookmarkCount: number;
-  opacity: number;
-  onOpacityChange: (opacity: number) => void;
 }
 
 const ControlBar: React.FC<ControlBarProps> = ({
@@ -31,8 +28,6 @@ const ControlBar: React.FC<ControlBarProps> = ({
   bookmarkMode,
   onToggleBookmarkMode,
   bookmarkCount,
-  opacity,
-  onOpacityChange,
 }) => {
   return (
     <div
@@ -119,17 +114,7 @@ const ControlBar: React.FC<ControlBarProps> = ({
           </svg>
         </ControlButton>
 
-        {/* 透明度滑块 */}
-        <motion.div
-          className="control-item"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <OpacitySlider
-            opacity={opacity}
-            onChange={onOpacityChange}
-          />
-        </motion.div>
+
       </div>
     </div>
   );

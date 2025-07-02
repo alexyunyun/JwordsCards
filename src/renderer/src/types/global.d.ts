@@ -6,15 +6,11 @@ declare global {
       getBookmark: (wordId: string) => Promise<boolean>;
       setBookmark: (wordId: string, isBookmarked: boolean) => Promise<boolean>;
       getAllBookmarks: () => Promise<string[]>;
-      setWindowOpacity: (opacity: number) => Promise<boolean>;
-      getWindowOpacity: () => Promise<number>;
+
       getWordPosition: () => Promise<{ currentIndex: number; bookmarkMode: boolean }>;
       setWordPosition: (position: { currentIndex: number; bookmarkMode: boolean }) => Promise<boolean>;
     };
-    electronAPI?: {
-      setWindowOpacity: (opacity: number) => Promise<boolean>;
-      getWindowOpacity: () => Promise<number>;
-    };
+
   }
 }
 

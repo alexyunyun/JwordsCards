@@ -4,44 +4,43 @@ import '../styles/CardFace.css';
 
 interface CardFaceProps {
   word: Word;
-  isBack?: boolean;
 }
 
-const CardFace: React.FC<CardFaceProps> = ({ word, isBack = false }) => {
-  if (isBack) {
-    return (
-      <div className="card-face card-back">
-        <div className="card-content">
-          <div className="card-text-container">
-            <h2 className="word-meaning font-chinese">
-              {word.meaning}
-            </h2>
-            {word.example && (
-              <div className="word-example">
-                <p className="font-japanese">
-                  {word.example}
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+const CardFace: React.FC<CardFaceProps> = ({ word }) => {
   return (
-    <div className="card-face card-front">
+    <div className="card-face">
       <div className="card-content">
         <div className="card-text-container">
+          {/* 日语单词 */}
           <h1 className="word-main font-japanese">
             {word.word}
           </h1>
-          <p className="word-pronunciation">
-            {word.pronunciation.romaji}
-          </p>
-          <p className="word-katakana">
-            {word.pronunciation.katakana}
-          </p>
+          
+          {/* 假名发音 */}
+          <div className="pronunciation-container">
+            <p className="word-pronunciation">
+              {word.pronunciation.romaji}
+            </p>
+            <p className="word-katakana">
+              {word.pronunciation.katakana}
+            </p>
+          </div>
+          
+          {/* 中文释义 */}
+          <div className="meaning-container">
+            <h2 className="word-meaning font-chinese">
+              {word.meaning}
+            </h2>
+          </div>
+          
+          {/* 例句 */}
+          {word.example && (
+            <div className="example-container">
+              <p className="word-example font-japanese">
+                {word.example}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -58,9 +58,8 @@ function createWindow(): void {
   }
 
   mainWindow.on('ready-to-show', () => {
-    // 确保窗口完全不透明，透明度由CSS背景层控制
+    // 透明度完全由CSS背景层控制，不设置窗口透明度
     if (mainWindow && !mainWindow.isDestroyed()) {
-      mainWindow.setOpacity(1.0);
       mainWindow.show();
     }
   });
@@ -149,17 +148,7 @@ app.whenReady().then(() => {
     return store.get('bookmarks', []) as string[];
   });
 
-  // 移除窗口透明度控制，现在由CSS背景层控制透明度
-  // 保留IPC处理器以避免前端错误，但不执行任何操作
-  ipcMain.handle('set-window-opacity', () => {
-    // 不再控制窗口透明度
-    return true;
-  });
 
-  ipcMain.handle('get-window-opacity', () => {
-    // 返回默认值，实际透明度由CSS控制
-    return 0.95;
-  });
 
   // 单词位置记忆功能
   ipcMain.handle('get-word-position', () => {

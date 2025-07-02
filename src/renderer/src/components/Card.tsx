@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { useTTS } from '../hooks/useTTS';
-import { useOpacity } from '../hooks/useOpacity';
 import type { Word, Theme } from '../types';
 import ThemeToggle from './ThemeToggle';
 import ProgressIndicator from './ProgressIndicator';
-import FlipCard from './FlipCard';
+import WordCard from './WordCard';
 import ControlBar from './ControlBar';
 import '../styles/Card.css';
 
@@ -37,13 +37,7 @@ function Card({
   onToggleBookmarkMode,
   bookmarkCount,
 }: CardProps): JSX.Element {
-  const [isFlipped, setIsFlipped] = useState(false);
   const { speak, isPlaying, isSupported } = useTTS();
-  const { opacity, updateOpacity } = useOpacity();
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
-  };
 
   const handleSpeak = async () => {
     if (isSupported && !isPlaying) {
@@ -56,12 +50,10 @@ function Card({
   };
 
   const handleNext = () => {
-    setIsFlipped(false);
     onNext();
   };
 
   const handlePrevious = () => {
-    setIsFlipped(false);
     onPrevious();
   };
 
@@ -69,10 +61,7 @@ function Card({
     <div className="card-wrapper">
       <div className="card-container">
         {/* 背景层 */}
-        <div
-          className="card-background"
-          style={{ opacity: opacity }}
-        ></div>
+        <div className="card-background"></div>
         {/* 完整卡片容器 */}
         <div className="card-main">
           {/* 右上角主题切换按钮 */}
@@ -95,12 +84,12 @@ function Card({
             bookmarkMode={bookmarkMode}
           />
 
-          {/* 卡片翻转容器 */}
-          <FlipCard
-            word={word}
-            isFlipped={isFlipped}
-            onFlip={handleFlip}
-          />
+          {/* 卡片容器 */}
+          <AnimatePresence mode="wait">
+            <WordCard
+              word={word}
+            />
+          </AnimatePresence>
 
           {/* 底部控制栏 */}
           <ControlBar
@@ -114,8 +103,6 @@ function Card({
             bookmarkMode={bookmarkMode}
             onToggleBookmarkMode={onToggleBookmarkMode}
             bookmarkCount={bookmarkCount}
-            opacity={opacity}
-            onOpacityChange={updateOpacity}
           />
         </div>
       </div>

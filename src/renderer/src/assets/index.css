@@ -64,54 +64,7 @@ body {
   box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* Card flip animation */
-.card-flip {
-  transform-style: preserve-3d;
-  transition: transform 0.6s ease-in-out;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.card-flip.flipped {
-  transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.75rem;
-  overflow: hidden;
-  backface-visibility: hidden;
-}
-
-.card-front {
-  transform: rotateY(0deg);
-}
-
-.card-back {
-  transform: rotateY(-180deg);
-}
-
-/* 确保背面内容布局与正面一致 */
-.card-back .card-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100%;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-  padding-left: clamp(0.75rem, 3vw, 1.5rem);
-  padding-right: clamp(0.75rem, 3vw, 1.5rem);
-  box-sizing: border-box;
-  position: relative;
-}
+/* 移除重复的卡片翻转动画样式，避免与实际组件冲突 */
 
 /* Button hover effects */
 .btn-hover {
@@ -158,51 +111,9 @@ body {
   background: rgba(0, 0, 0, 0.5);
 }
 
-/* 卡片样式优化 */
-.card-container {
-  perspective: 1000px;
-}
-
-/* 正面内容样式 */
-.card-front .card-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100%;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-  padding-left: clamp(0.75rem, 3vw, 1.5rem);
-  padding-right: clamp(0.75rem, 3vw, 1.5rem);
-  box-sizing: border-box;
-  position: relative;
-}
-
-.card-content {
-  position: relative;
-  z-index: 1;
-}
+/* 移除重复的卡片样式定义，避免与组件样式冲突 */
 
 /* 文字样式优化 - 响应式字体大小 */
-.word-main {
-  font-size: clamp(1.5rem, 6vw, 2.2rem) !important;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: clamp(0.5rem, 2vh, 1rem);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  word-break: break-word;
-  font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif !important;
-  color: #1f2937 !important;
-  display: block !important;
-  visibility: visible !important;
-}
-
-.dark .word-main {
-  color: #ffffff !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
 
 /* 响应式媒体查询 */
 @media (max-width: 480px) {
@@ -260,21 +171,7 @@ body {
   color: #9ca3af;
 }
 
-.word-meaning {
-  font-size: clamp(1.1rem, 4vw, 1.4rem);
-  font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: clamp(0.5rem, 2vh, 1rem);
-  text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  word-break: break-word;
-  color: #1f2937;
-}
 
-.dark .word-meaning {
-  color: #ffffff;
-  text-shadow: 0 0.5px 1px rgba(0, 0, 0, 0.4);
-}
 
 .word-example {
   font-size: clamp(0.75rem, 2.5vw, 0.875rem);
@@ -339,16 +236,18 @@ body {
 
 /* 进度指示器样式 */
 .progress-indicator {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
   padding: 0.3rem 0.6rem;
   display: flex;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .dark .progress-indicator {
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(40, 40, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }

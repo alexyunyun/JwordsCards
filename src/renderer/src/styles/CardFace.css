@@ -11,15 +11,40 @@
   align-items: center;
   text-align: center;
   height: 100%;
-  padding: 2rem 1.5rem 4rem 1.5rem;
+  padding: 1rem 1.5rem 4rem 1.5rem;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
+  overflow-y: auto;
 }
 
 .card-text-container {
   text-align: center;
   max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.pronunciation-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.meaning-container {
+  margin: 0.25rem 0;
+}
+
+.example-container {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .example-container {
+  border-top-color: rgba(255, 255, 255, 0.2);
 }
 
 .word-main {
@@ -34,6 +59,7 @@
   color: #1f2937;
   display: block;
   visibility: visible;
+  transition: text-shadow 0.3s ease;
 }
 
 .dark .word-main {
@@ -73,6 +99,7 @@
   max-width: 100%;
   word-break: break-word;
   color: #1f2937;
+  transition: text-shadow 0.3s ease;
 }
 
 .dark .word-meaning {

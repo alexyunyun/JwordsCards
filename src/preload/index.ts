@@ -14,10 +14,7 @@ const api = {
     ipcRenderer.invoke('set-bookmark', wordId, isBookmarked),
   getAllBookmarks: () => ipcRenderer.invoke('get-all-bookmarks'),
 
-  // Window opacity
-  setWindowOpacity: (opacity: number) =>
-    ipcRenderer.invoke('set-window-opacity', opacity),
-  getWindowOpacity: () => ipcRenderer.invoke('get-window-opacity'),
+
 
   // Word position memory
   getWordPosition: () => ipcRenderer.invoke('get-word-position'),
