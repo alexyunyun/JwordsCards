@@ -8,7 +8,7 @@ JWordCards 是一个跨平台桌面应用，以悬浮卡片形式展示日语单
 
 ### ✨ 核心特性
 - 🎴 **悬浮卡片**: 固定位置显示，支持拖动和调整大小
-- 🔄 **翻转效果**: 点击查看中文释义和例句
+- 📖 **一体化显示**: 同时展示日语单词、发音、中文释义和例句
 - 🔊 **语音朗读**: 日语单词发音支持
 - ❤️ **收藏系统**: 重要单词收藏和专项学习
 - 🌙 **主题切换**: 浅色/深色模式
@@ -51,23 +51,6 @@ JWordCards 是一个跨平台桌面应用，以悬浮卡片形式展示日语单
 
 **最低要求：** macOS 10.14 (Mojave) 或更高版本
 
-#### <img src="docs/icons/linux-icon.svg" width="20" height="20" style="vertical-align: middle;"> Linux 用户
-
-**快速检查方法：**
-```bash
-# 检查发行版
-lsb_release -a
-# 检查架构
-uname -m
-```
-
-| 发行版 | 架构 | 推荐安装包 | 状态 |
-|--------|------|-----------|------|
-| Ubuntu 18.04+ | x86_64 | `JWordCards-1.0.0.AppImage` | <img src="docs/icons/check-icon.svg" width="16" height="16"> |
-| Debian 10+ | x86_64 | `JWordCards-1.0.0.AppImage` | <img src="docs/icons/check-icon.svg" width="16" height="16"> |
-| CentOS 7+ | x86_64 | `JWordCards-1.0.0.AppImage` | <img src="docs/icons/check-icon.svg" width="16" height="16"> |
-| 其他现代发行版 | x86_64 | `JWordCards-1.0.0.AppImage` | <img src="docs/icons/check-icon.svg" width="16" height="16"> |
-
 ---
 
 ## 📥 安装指南
@@ -96,31 +79,52 @@ uname -m
 - 如遇安全警告，前往「系统偏好设置」→「安全性与隐私」→「通用」
 - 点击「仍要打开」允许应用运行
 
-### <img src="docs/icons/linux-icon.svg" width="20" height="20" style="vertical-align: middle;"> Linux 安装
+### 🔍 快速系统检测脚本
 
-#### AppImage 方式 (推荐)
-```bash
-# 下载后添加执行权限
-chmod +x JWordCards-1.0.0.AppImage
+#### Windows PowerShell
+```powershell
+# 系统信息检测脚本
+$osInfo = Get-WmiObject -Class Win32_OperatingSystem
+$computerInfo = Get-WmiObject -Class Win32_ComputerSystem
 
-# 直接运行
-./JWordCards-1.0.0.AppImage
+Write-Host "=== JWordCards 系统兼容性检测 ===" -ForegroundColor Green
+Write-Host "操作系统: $($osInfo.Caption)" -ForegroundColor Yellow
+Write-Host "版本: $($osInfo.Version)" -ForegroundColor Yellow
+Write-Host "架构: $($osInfo.OSArchitecture)" -ForegroundColor Yellow
+Write-Host "总内存: $([math]::Round($computerInfo.TotalPhysicalMemory/1GB, 2)) GB" -ForegroundColor Yellow
+
+# 兼容性检查
+if ($osInfo.Version -ge "10.0") {
+    Write-Host "✅ 系统兼容" -ForegroundColor Green
+    Write-Host "推荐下载: JWordCards Setup 1.0.0.exe" -ForegroundColor Cyan
+} else {
+    Write-Host "❌ 系统版本过低，需要 Windows 10 或更高版本" -ForegroundColor Red
+}
 ```
 
-#### 系统集成 (可选)
+#### macOS Terminal
 ```bash
-# 移动到系统目录
-sudo mv JWordCards-1.0.0.AppImage /opt/jwordcards
+#!/bin/bash
+# 系统信息检测脚本
 
-# 创建桌面快捷方式
-cat > ~/.local/share/applications/jwordcards.desktop << EOF
-[Desktop Entry]
-Name=JWordCards
-Exec=/opt/jwordcards
-Icon=jwordcards
-Type=Application
-Categories=Education;
-EOF
+echo "=== JWordCards 系统兼容性检测 ==="
+echo "操作系统: $(sw_vers -productName)"
+echo "版本: $(sw_vers -productVersion)"
+echo "架构: $(uname -m)"
+echo "总内存: $(sysctl -n hw.memsize | awk '{print $1/1024/1024/1024 " GB"}')"
+
+# 兼容性检查
+version=$(sw_vers -productVersion | cut -d. -f1,2)
+if (( $(echo "$version >= 10.15" | bc -l) )); then
+    echo "✅ 系统兼容"
+    if [[ $(uname -m) == "arm64" ]]; then
+        echo "推荐下载: JWordCards-1.0.0-arm64.dmg (Apple Silicon)"
+    else
+        echo "推荐下载: JWordCards-1.0.0.dmg (Intel)"
+    fi
+else
+    echo "❌ 系统版本过低，需要 macOS 10.15 或更高版本"
+fi
 ```
 
 ---
@@ -131,25 +135,25 @@ EOF
 
 ```
 ┌─────────────────────────────────┐
-│  [1/9999] 📊          🌙 ⚙️    │  ← 顶部状态栏
+│  [1/9999] 📚              🌙    │  ← 进度指示器 & 主题切换
 ├─────────────────────────────────┤
 │                                 │
 │         こんにちは              │  ← 日语单词
 │        (konnichiwa)             │  ← 罗马音
+│         コンニチハ              │  ← 片假名
 │                                 │
-│     [点击翻转查看释义]           │  ← 提示文字
+│          你好                   │  ← 中文释义
+│                                 │
+│     こんにちは、田中です。      │  ← 例句
 │                                 │
 ├─────────────────────────────────┤
-│  ← [🔊] [❤️] [→]              │  ← 控制按钮
+│      ◀  🔊  ❤️  📚  ▶         │  ← 控制按钮
 └─────────────────────────────────┘
 ```
 
 ### 基本操作
 
-#### 🔄 卡片翻转
-- **点击卡片中央** 查看中文释义和例句
-- **再次点击** 返回日语单词面
-- **快捷键**: `Space` 空格键
+
 
 #### 📖 单词导航
 - **左右箭头按钮**: 上一个/下一个单词
@@ -163,9 +167,10 @@ EOF
 
 #### ❤️ 收藏功能
 - **点击心形图标** 收藏/取消收藏单词
-- **收藏模式**: 点击左上角数字区域切换
+- **收藏模式**: 点击底部控制栏的书签图标切换
   - 「全部模式」: 显示所有单词
   - 「收藏模式」: 仅显示收藏的单词
+- **收藏数量**: 书签图标上显示收藏单词总数
 
 ### 界面定制
 
@@ -187,8 +192,10 @@ EOF
 | 快捷键 | 功能 |
 |--------|------|
 | `←` / `→` | 上一个/下一个单词 |
-| `Space` | 翻转卡片 |
-| `Esc` | 退出应用 |
+| `Space` | 下一个单词 |
+| `B` | 收藏/取消收藏当前单词 |
+| `M` | 切换收藏模式 |
+| `T` | 切换主题模式 |
 
 ### 学习建议
 
@@ -216,8 +223,7 @@ A: 前往「系统偏好设置」→「安全性与隐私」→「通用」，�
 **Q: Windows 提示 SmartScreen 警告？**
 A: 点击"更多信息"，然后选择"仍要运行"。这是正常的安全提示。
 
-**Q: Linux 下 AppImage 无法运行？**
-A: 确保已添加执行权限：`chmod +x JWordCards-1.0.0.AppImage`
+
 
 ### 功能相关
 
