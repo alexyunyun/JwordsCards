@@ -11,6 +11,10 @@ export function useWordBank() {
   });
 
   const [bookmarks, setBookmarks] = useState<string[]>([]);
+  
+  // 分别保存两种模式下的进度位置
+  const [normalModeIndex, setNormalModeIndex] = useState(0);
+  const [bookmarkModeIndex, setBookmarkModeIndex] = useState(0);
 
   // 初始化数据
   useEffect(() => {
@@ -28,15 +32,25 @@ export function useWordBank() {
           currentIndex: 0,
           bookmarkMode: false,
         };
+        
+        // 加载分别保存的模式进度
+        const savedNormalIndex = (await window.api?.getSetting?.('normalModeIndex')) || 0;
+        const savedBookmarkIndex = (await window.api?.getSetting?.('bookmarkModeIndex')) || 0;
+        
+        setNormalModeIndex(savedNormalIndex);
+        setBookmarkModeIndex(savedBookmarkIndex);
 
         // 获取显示的单词列表
         const displayWords = savedPosition.bookmarkMode
           ? words.filter((word) => savedBookmarks.includes(word.id))
           : words;
 
+        // 根据当前模式选择对应的索引
+        const modeIndex = savedPosition.bookmarkMode ? savedBookmarkIndex : savedNormalIndex;
+        
         // 确保索引在有效范围内
         const validIndex = Math.min(
-          savedPosition.currentIndex,
+          modeIndex,
           Math.max(0, displayWords.length - 1)
         );
 
@@ -79,7 +93,17 @@ export function useWordBank() {
   // 保存当前位置到存储
   const savePosition = useCallback(async (currentIndex: number, bookmarkMode: boolean) => {
     try {
+      // 保存总体位置信息
       await window.api?.setWordPosition?.({ currentIndex, bookmarkMode });
+      
+      // 分别保存两种模式的进度
+      if (bookmarkMode) {
+        setBookmarkModeIndex(currentIndex);
+        await window.api?.setSetting?.('bookmarkModeIndex', currentIndex);
+      } else {
+        setNormalModeIndex(currentIndex);
+        await window.api?.setSetting?.('normalModeIndex', currentIndex);
+      }
     } catch (error) {
       console.error('Failed to save word position:', error);
     }
@@ -191,7 +215,7 @@ export function useWordBank() {
   );
 
   // 切换书签模式
-  const toggleBookmarkMode = useCallback(() => {
+  const toggleBookmarkMode = useCallback(async () => {
     setState((prev) => {
       const newBookmarkMode = !prev.bookmarkMode;
       const displayWords = newBookmarkMode
@@ -202,19 +226,26 @@ export function useWordBank() {
         return prev;
       }
 
+      // 使用对应模式保存的进度位置
+      const savedIndex = newBookmarkMode ? bookmarkModeIndex : normalModeIndex;
+      
+      // 确保索引在有效范围内
+      const newIndex = Math.min(savedIndex, Math.max(0, displayWords.length - 1));
+      const newCurrentWord = displayWords[newIndex] || null;
+
       const newState = {
         ...prev,
         bookmarkMode: newBookmarkMode,
-        currentIndex: 0,
-        currentWord: displayWords[0] || null,
+        currentIndex: newIndex,
+        currentWord: newCurrentWord,
       };
       
       // 保存位置
-      savePosition(0, newBookmarkMode);
+      savePosition(newIndex, newBookmarkMode);
       
       return newState;
     });
-  }, [bookmarks, savePosition]);
+  }, [bookmarks, savePosition, normalModeIndex, bookmarkModeIndex]);
 
   // 检查是否已收藏
   const isBookmarked = useCallback(

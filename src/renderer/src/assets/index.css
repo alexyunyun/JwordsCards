@@ -10,12 +10,19 @@
   box-sizing: border-box;
 }
 
+html {
+  background: transparent;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
 body {
   font-family: 'Noto Sans JP', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: transparent;
   overflow: hidden;
+  border-radius: 1rem;
 }
 
 #root {
@@ -25,6 +32,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  border-radius: 1rem;
 }
 
 /* 防止内容溢出和背景残留 */

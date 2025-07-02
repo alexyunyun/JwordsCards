@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .card-container {
@@ -14,10 +14,6 @@
   position: relative;
   width: 100%;
   height: 100%;
-  max-width: 420px;
-  max-height: 280px;
-  min-width: 320px;
-  min-height: 220px;
 }
 
 .card-background {
@@ -31,10 +27,7 @@
   border-radius: 1rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   z-index: 1;
-
 }
-
-
 
 .dark .card-background {
   background: rgb(40, 40, 40);

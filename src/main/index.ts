@@ -1,8 +1,8 @@
-import { app, shell, BrowserWindow, ipcMain, screen } from 'electron';
-import { join } from 'path';
-import { electronApp, optimizer, is } from '@electron-toolkit/utils';
+import { electronApp, is, optimizer } from '@electron-toolkit/utils';
+import { app, BrowserWindow, ipcMain, screen, shell } from 'electron';
 import Store from 'electron-store';
-import icon from '../../resources/icon.png?asset'
+import { join } from 'path';
+import icon from '../../resources/icon.png?asset';
 const iconMac = join(__dirname, '../../resources/icon.icns');
 
 const store = new Store();
@@ -14,13 +14,14 @@ if (process.platform === 'darwin') {
 }
 
 function createWindow(): void {
-  // 获取保存的窗口位置，默认右下角
-  const savedBounds = store.get('windowBounds', {
-    width: 640,
-    height: 340,
+  // 强制使用新的窗口尺寸，清除旧缓存
+  store.delete('windowBounds'); // 清除旧的窗口尺寸缓存
+  const savedBounds = {
+    width: 360,
+    height: 220,
     x: undefined,
     y: undefined,
-  }) as { width: number; height: number; x?: number; y?: number };
+  };
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -33,7 +34,8 @@ function createWindow(): void {
       process.platform === 'darwin' ? 'customButtonsOnHover' : 'default', // macOS悬停时显示按钮
     alwaysOnTop: true, // 始终置顶
     resizable: false,
-    transparent: true,
+    transparent: true, // 保持透明窗口
+    backgroundColor: '#00000000', // 设置透明背景色
     autoHideMenuBar: true,
     icon: process.platform === 'darwin' ? iconMac : icon, // 根据平台使用不同图标
     title: 'JWordCards', // 设置应用标题
@@ -99,14 +101,14 @@ function createWindow(): void {
 app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.jwordcards.app');
-  
+
   // 设置应用详细信息（macOS）
   if (process.platform === 'darwin') {
     app.setAboutPanelOptions({
       applicationName: 'JWordCards',
       applicationVersion: '1.0.0',
       copyright: 'Copyright © 2024 JWordCards',
-      credits: '日语单词学习应用'
+      credits: '日语单词学习应用',
     });
   }
 
@@ -148,17 +150,18 @@ app.whenReady().then(() => {
     return store.get('bookmarks', []) as string[];
   });
 
-
-
   // 单词位置记忆功能
   ipcMain.handle('get-word-position', () => {
     return store.get('wordPosition', { currentIndex: 0, bookmarkMode: false });
   });
 
-  ipcMain.handle('set-word-position', (_, position: { currentIndex: number; bookmarkMode: boolean }) => {
-    store.set('wordPosition', position);
-    return true;
-  });
+  ipcMain.handle(
+    'set-word-position',
+    (_, position: { currentIndex: number; bookmarkMode: boolean }) => {
+      store.set('wordPosition', position);
+      return true;
+    },
+  );
 
   createWindow();
 
